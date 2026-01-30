@@ -1,11 +1,15 @@
 {
-  "name": "prestashop/prestashop-webservice-lib",
-  "description": "PrestaShop Webservice access library",
+  "name": "mariopereira/prestashop-webservice-lib",
+  "description": "PrestaShop Webservice access library (fork to be able to bump version)",
   "license": "OSL-3.0",
   "authors": [
     {
       "name": "PrestaShop SA",
       "email": "contact@prestashop.com"
+    },
+    {
+      "name": "Mário Pereira",
+      "email": "bin.to.hex@gmail.com"
     }
   ],
   "autoload": {
