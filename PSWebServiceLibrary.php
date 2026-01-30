@@ -49,6 +49,9 @@ class PrestaShopWebservice
     /** @var string Maximal version of PrestaShop to use with this library */
     const psCompatibleVersionsMax = '9.0.0'; // bumped to be able to use v 9.0
 
+    /** @var array Calls made */
+    protected $calls_made;
+
     /**
      * PrestaShopWebservice constructor. Throw an exception when CURL is not installed/activated
      * <code>
@@ -83,6 +86,24 @@ class PrestaShopWebservice
         $this->key = $key;
         $this->debug = $debug;
         $this->version = 'unknown';
+        $this->calls_made = [];
+    }
+
+    /**
+     * Get a list of all calls made to the backend
+     * @return array List of calls
+     */
+    public function getCallList()
+    {
+        return $this->calls_made;
+    }
+
+    /**
+     * Clear the list of the calls made to the backend
+     */
+    public function clearCallList()
+    {
+        $this->calls_made = [];
     }
 
     /**
@@ -172,6 +193,8 @@ class PrestaShopWebservice
     protected function executeRequest($url, $curl_params = array())
     {
         $defaultParams = $this->getCurlDefaultParams();
+
+        $this->calls_made[] = $url;
 
         $session = curl_init($url);
 
