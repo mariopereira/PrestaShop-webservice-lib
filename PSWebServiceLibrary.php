@@ -49,6 +49,8 @@ class PrestaShopWebservice
     /** @var string Maximal version of PrestaShop to use with this library */
     const psCompatibleVersionsMax = '9.0.0'; // bumped to be able to use v 9.0
 
+    /** @var bool Enable collection of calls made */
+    protected $enable_calls_logger;
     /** @var array Calls made */
     protected $calls_made;
 
@@ -86,7 +88,30 @@ class PrestaShopWebservice
         $this->key = $key;
         $this->debug = $debug;
         $this->version = 'unknown';
+        $this->enable_calls_logger = false;
         $this->calls_made = [];
+    }
+
+    /**
+     * Enable disable the collection of calls made
+     * @param bool $enable
+     */
+    public function enableCallsLogger(bool $enable)
+    {
+        $this->enable_calls_logger = $enable;
+    }
+
+    /**
+     * Add a call to the call list
+     * @param string $url Url called
+     */
+    protected function addCallToLogger(string $url)
+    {
+        if (!$this->enable_calls_logger) {
+            return;
+        }
+
+        $this->calls_made[] = $url;
     }
 
     /**
@@ -194,7 +219,7 @@ class PrestaShopWebservice
     {
         $defaultParams = $this->getCurlDefaultParams();
 
-        $this->calls_made[] = $url;
+        $this->addCallToLogger($url);
 
         $session = curl_init($url);
 
