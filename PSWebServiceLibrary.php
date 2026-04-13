@@ -47,7 +47,7 @@ class PrestaShopWebservice
     /** @var string Minimal version of PrestaShop to use with this library */
     const psCompatibleVersionsMin = '1.4.0.0';
     /** @var string Maximal version of PrestaShop to use with this library */
-    const psCompatibleVersionsMax = '9.0.0'; // bumped to be able to use v 9.0
+    const psCompatibleVersionsMax = '9.1.0'; // bumped to be able to use v 9.1
 
     /** @var bool Enable collection of calls made */
     protected $enable_calls_logger;
